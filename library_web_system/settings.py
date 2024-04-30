@@ -31,7 +31,7 @@ SECRET_KEY = os.environ.get("KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get("DEV")
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['librarymanagement.online, www.librarymanagement.online']
 
 
 # Application definition
