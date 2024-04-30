@@ -1,0 +1,219 @@
+{% extends 'administration/base/main.html' %}
+{% load static %}
+
+
+{% block content %}
+<div class="container-fluid">
+    <!-- <div class="card mb-4">
+        <div class="card-header bg-primary py-3">
+            <h6 class="m-0 font-weight-bold text-white">Borrowed Books</h6>
+        </div>
+        <div class="card-body">
+            
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Book</th>
+                            <th>Borrower</th>
+                            <th>Borrowed at</th>
+                            <th>Returned at</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        {% for borrowed_book in borrowed_books %}
+                        <tr>
+                            <td>{{forloop.counter}}</td>
+                            <td>{{borrowed_book.reserved_book.book.title}}</td>
+                            <td>{{borrowed_book.reserved_book.reservee.first_name}} {{borrowed_book.reserved_book.reservee.last_name}}</td>
+                            <td>{{borrowed_book.borrowed_date}}</td>
+                            <td>{{borrowed_book.returned_date}}</td>
+                            <td>{{borrowed_book.status}}</td>
+                            <td>
+                                {% if borrowed_book.returned_date is None %}
+                                    <a href="{% url 'return_book_borrowed' borrowed_book.id %}" class="btn btn-info btn-sm">return book</a>
+                                {% else %}
+                                    <h6 class="text-success">return already</h6>
+                                {% endif %}
+                            </td>    
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+
+
+            
+        </div>
+    </div> -->
+
+    <div class="card mb-4">
+        <div class="card-header bg-primary py-3">
+            <h6 class="m-0 font-weight-bold text-white">Borrowed Books (From Reservation)</h6>
+        </div>
+
+        <div class="card-body">
+            <!-- <a href="#" class="btn btn-md btn-primary float-end">Borrow a book</a> -->
+            <div class="table-responsive">
+                <table class="table table-bordered" id="ReservationTable">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Book</th>
+                            <th>Borrower</th>
+                            <th>Borrowed date</th>
+                            <th>Returned date</th>
+                            <th>Status</th>
+                            <th>Date to return</th>
+                            <th>QR CODE</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                       
+                        
+                        {% for record in borrow_records %}
+
+                           
+
+
+                            
+                                <tr>
+                                    <td>{{forloop.counter}}</td>
+                                    <td>{{record.reservation.book.title}}</td>
+                                    <td>{{record.reservation.reservee.get_full_name}}</td>
+                                    <td>{{record.borrowed_date}}</td>
+                                    <td>{{record.returned_date|default:"---"}}</td>
+                                    <td>{{record.status}}</td>
+                                    <td>{{record.date_to_return|date:"F d, Y"}}</td>
+                                    <td>{{record.reservation.qr_code}}</td>
+                                    <td>
+                                        {% if record.returned_date is None %}
+                                            <a href="{% url 'return_book_reservation' record.id %}" class="btn btn-outline-info btn-sm">Return</a>
+                                        {% else %}
+                                            <p class="text-success" style="font-size: 10px !important;">Return already</p>
+                                        {% endif %}
+                                    </td>
+                                    <!-- <td><button class="btn btn-outline-info btn-sm">Return</button></td> -->
+
+                                 </tr>
+
+                           
+                                
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="card mb-4">
+        <div class="card-header bg-warning py-3">
+            <h6 class="m-0 font-weight-bold text-white">Borrowed Books (From Walk In)</h6>
+        </div>
+
+        <div class="card-body">
+            <a href="{% url 'borrow_book_walkin' %}" class="btn btn-md btn-warning float-end">Borrow a book</a>
+            <div class="table-responsive">
+                <table class="table table-bordered" id="ReservationTable2">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Book</th>
+                            <th>Borrower</th>
+                            <th>Borrowed date</th>
+                            <th>Returned date</th>
+                            <th>Status</th>
+                            <th>Date to return</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+
+
+
+                    <tbody>
+                        {% for walk_in in walk_in_records %}
+                            <tr>
+                                <td>{{forloop.counter}}</td>
+                                <td>{{walk_in.book.title}}</td>
+                                <td>{{walk_in.walk_in_user}}</td>
+                                <td>{{walk_in.borrowed_date}}</td>
+                                <td>{{walk_in.returned_date|default:"---"}}</td>
+                                <td>{{walk_in.status}}</td>
+                                <td>{{walk_in.date_to_return|date:"F d, Y"}}</td>
+                                <td>
+                                    {% if walk_in.returned_date is None %}
+                                        <a href="{% url 'return_book_reservation' walk_in.id %}" class="btn btn-outline-info btn-sm">Return</a>
+                                    {% else %}
+                                        <p class="text-success" style="font-size: 10px !important;">Return already</p>
+                                    {% endif %}
+                                </td>
+                            </tr>
+
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+
+
+
+
+    </div>
+
+
+
+
+
+
+
+
+</div>
+
+{% endblock %}
+
+
+{% block script %}
+
+    <!-- <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.12.1/datatables.min.js"></script> -->
+
+    <script>
+        $(document).ready(function() {
+            $('#ReservationTable').DataTable({
+                order: [[7, 'asc']],
+                rowGroup: {
+                    startRender: null,
+                    endRender: function ( rows, group ) {
+                        return ' '+ group +' ('+rows.count()+' books) ';
+                    },
+                    dataSrc: 7
+                },
+                columnDefs : [{targets: 7, visible: false,searchable: false,}]
+            });
+
+
+            $('#ReservationTable2').DataTable({
+                order: [[2, 'asc']],
+                rowGroup: {
+                    startRender: null,
+                    endRender: function ( rows, group ) {
+                        return ' '+group+' - '+rows.count() +' books';
+                    },
+                    dataSrc: 2
+                },
+                //columnDefs : [{targets: 7, visible: false,searchable: false,}]
+            });
+        } );
+    </script>
+   
+
+
+{% endblock %}

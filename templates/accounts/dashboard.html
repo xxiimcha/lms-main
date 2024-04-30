@@ -1,0 +1,109 @@
+{% extends 'accounts/profile.html' %}
+{% load static %}
+
+{% block profile_content %}
+
+    <div class="dashboard-title fl-wrap">
+        <h3>Dashboard</h3>
+    </div>
+    <div class="list-single-facts fl-wrap">
+        <div class="row">
+            <div class="col-md-4">
+                 <!-- inline-facts -->
+                <div class="inline-facts-wrap bg-info">
+                    <div class="inline-facts">
+                        <!-- <i class="fal fa-chart-bar"></i> -->
+                        <div class="milestone-counter">
+                            <div class="stats animaper">
+                                <div class="num" data-content="{{total_borrowed_books}}" data-num="{{total_borrowed_books}}">0</div>
+                            </div>
+                        </div>
+                        <h6 class="fw-bold fs-6">Borrowed books</h6>
+                    </div>
+                    <div class="stat-wave">
+                        <svg viewbox="0 0 100 25">
+                            <path fill="#fff" d="M0 30 V12 Q30 17 55 2 T100 11 V30z" />
+                        </svg>
+                    </div>
+                </div>
+                <!-- inline-facts end -->
+            </div>
+
+            <div class="col-md-4">
+                <!-- inline-facts -->
+               <div class="inline-facts-wrap bg-primary">
+                   <div class="inline-facts">
+                       <!-- <i class="fal fa-chart-bar"></i> -->
+                       <div class="milestone-counter">
+                           <div class="stats animaper">
+                               <div class="num" data-content="0" data-num="0">0</div>
+                           </div>
+                       </div>
+                       <h6 class="fw-bold fs-6">Penalties</h6>
+                   </div>
+                   <div class="stat-wave">
+                       <svg viewbox="0 0 100 25">
+                           <path fill="#fff" d="M0 30 V12 Q30 17 55 2 T100 11 V30z" />
+                       </svg>
+                   </div>
+               </div>
+               <!-- inline-facts end -->
+           </div>
+           
+           <div class="col-md-4">
+            <!-- inline-facts -->
+           <div class="inline-facts-wrap bg-success">
+               <div class="inline-facts">
+                   <!-- <i class="fal fa-chart-bar"></i> -->
+                   <div class="milestone-counter">
+                       <div class="stats animaper">
+                           <div class="num" data-content="0" data-num="0">0</div>
+                       </div>
+                   </div>
+                   <h6 class="fw-bold fs-6">Remaining book borrowed</h6>
+               </div>
+               <div class="stat-wave">
+                   <svg viewbox="0 0 100 25">
+                       <path fill="#fff" d="M0 30 V12 Q30 17 55 2 T100 11 V30z" />
+                   </svg>
+               </div>
+           </div>
+           <!-- inline-facts end -->
+       </div>
+        </div>
+    </div>
+
+     <!-- list-single-facts end -->                                          
+     
+     <div class="card">
+        <div class="card-body">
+          <h5 class="border-bottom   pb-2 mb-0 text-start fw-bold text-primary">Borrowed Books</h5>
+          <!-- <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6> -->
+
+          <table class="table table-striped table-bordered border-primary">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Book Name</th>
+                <th scope="col">Date Borrowed</th>
+                <th scope="col">Date Return</th>
+              </tr>
+            </thead>
+            <tbody>
+            {% for borrowed_book in borrowed_books %}
+              <tr>
+                <th scope="row">{{forloop.counter}}</th>
+                <td>{{borrowed_book.reservation.book.title}}</td>
+                <td>{{borrowed_book.borrowed_date}}</td>
+                <td>{{borrowed_book.returned_date|default:"---"}}</td>
+              </tr>
+            {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+                                         
+    
+
+
+{% endblock %}

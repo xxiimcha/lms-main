@@ -1,0 +1,167 @@
+{% extends 'accounts/profile.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+
+{% block profile_content %}
+
+
+<style>
+    .hidden{
+        display: none;
+    }
+</style>
+
+<div class="dashboard-title fl-wrap mb-3 d-flex justify-content-between align-items-center">
+    
+    <h3>Add Reservation</h3>
+    <!-- <a href="#" class="btn btn-primary btn-sm">Make Reservation</a> -->
+    <!-- <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-sm btn-primary">Make reservation</button> -->
+</div>
+
+
+<div class="card rounded shadow">
+        <h5 class="card-header text-start">Reservation Form</h5>
+    <form method="POST" id="form-container" class="p-3">
+        {% csrf_token %}
+
+
+        {% if formset %}
+        {{ formset.management_form }}
+        <h6 class="text-start fw-bold fs-5" style="color: #f870d1;">Book list to reserve</h6>
+       
+
+        <div id="book-form-list">
+            {% for form in formset %}
+                <div class="book-form text-start fs-6 mb-3 border border-warning p-2 rounded" >
+                    {{form|crispy}}
+                </div>
+                
+            {% endfor %}
+            <!-- <button type="button" class="btn btn-danger btn-sm">remove</button>  -->
+
+        </div>
+
+
+       
+
+
+
+        <div id="empty-form" class="hidden">{{formset.empty_form|crispy}}</div>
+
+        
+
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end mb-2 mt-3">
+            <button id="add-more" class="btn btn-primary" type="button">Add more book</button>
+        </div>
+        {% endif %}
+        <div class="mt-2 text-start fs-6 mb-3">
+            <!-- <div id="date_resevation_input"></div> -->
+            <label for="date_resevation_text">Date of reservation <span>(year/month/day)</span></label>
+            <input type="text" id="date_resevation_text" name="date_resevation_text" class="form-control" placeholder="click to select date">
+        </div>
+
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end mb-2">
+            <button class="btn btn-success" type="submit">Save reservation</button>
+        </div>
+    </form>
+
+    
+</div>
+
+
+
+{% endblock %}
+
+
+
+
+{% block script %}
+<script type="text/javascript">
+    $(document).ready(function() {
+        var date = new Date();
+        var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+
+        $('#date_resevation_text').datepicker({
+            format: 'yyyy-mm-dd',
+            orientation: 'bottom',
+            startDate: today
+        });
+
+        $('#id_date_reservation').datepicker('setDate', today);
+
+    });
+
+</script>
+    
+<script>
+
+    
+    const addMoreBtn = document.getElementById("add-more")
+
+    const totalNewForms = document.getElementById('id_form-TOTAL_FORMS')
+
+    let currentCount  = 0
+    document.addEventListener('click',(event)=>{
+    
+        if (event.target.id == 'add-more'){
+            add_new_form(event)
+
+            currentCount+=1
+            if (currentCount == 4){
+                console.log(currentCount)
+                addMoreBtn.disabled = true
+                
+            }
+
+        }
+    })
+
+    
+
+
+    function add_new_form(events){
+        if (events) {
+            events.preventDefault()
+        }
+
+        const currentBookForms = document.getElementsByClassName('book-form')
+        const currentFormCount =  currentBookForms.length
+        
+
+        const formCopyTarget =  document.getElementById('book-form-list')
+        const copyEmptyFormEl = document.getElementById('empty-form').cloneNode(true)
+
+
+        copyEmptyFormEl.setAttribute('class','book-form text-start fs-6 mb-3 border border-warning p-2 rounded')
+        copyEmptyFormEl.setAttribute('id',`form-${currentFormCount}`)
+
+
+        
+        const regex = RegExp('__prefix__','g')
+        copyEmptyFormEl.innerHTML = copyEmptyFormEl.innerHTML.replace(regex,currentFormCount)
+
+        totalNewForms.setAttribute('value',currentFormCount + 1)
+
+
+        formCopyTarget.append(copyEmptyFormEl)
+
+        // if (currentFormCount==2){
+        //     // console.log('three forms na')
+        //     addMoreBtn.disabled = true
+        // }
+        
+
+
+
+
+
+    }
+
+
+
+    
+
+   
+</script>
+{% endblock %}

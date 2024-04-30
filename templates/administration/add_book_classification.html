@@ -1,0 +1,61 @@
+{% extends 'administration/base/main.html' %}
+{% load static %}
+
+{% load widget_tweaks %}
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-header bg-primary text-white">BOOK CLASSICATIONS</div>
+                    <div class="card-body">
+                        <form method="POST">
+                            {% csrf_token %}
+                            {{form|crispy}}
+
+                            <button type="submit" class="btn btn-success float-end">Add Classification</button>
+                        </form>
+                    </div>
+                </div>
+
+
+
+
+
+                <div class="card mt-5">
+                    <div class="card-header bg-primary text-white">BOOK CLASSICATION LIST</div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        
+                                    </tr>
+                                    
+                                </thead>
+                                
+                                <tbody>
+                                    {% for classification in classification_list %}
+                                    <tr>
+                                        <!-- <td>{{forloop.counter}}</td> -->
+                                        <td>{{classification.name}}</td>
+                                        <!-- <td><a href="#" class="btn btn-outline-primary">update</a></td> -->
+                                        <!-- <td>{{book.author}}</td>
+                                        <td>{{book.publisher}}</td>
+                                        <td>{{book.copies}}</td>
+                                        <td>{{book.genre}}</td> -->
+                                    </tr>
+                                        {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

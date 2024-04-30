@@ -1,0 +1,325 @@
+{% load static %}
+
+
+<ul class="navbar-nav  sidebar sidebar-dark accordion" style="background:#f870d1;" id="accordionSidebar">
+
+    <!-- Sidebar - Brand -->
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
+        <div class="sidebar-brand-icon">
+            <!-- <i class="fas fa-laugh-wink"></i> -->
+            <img src="{% static 'administration/img/logo-library.jpg' %}" alt="" width="40px" height="40px">
+            <!-- <i class="fas fa-university"></i> -->
+        </div>
+        <div class="sidebar-brand-text mx-3">Library System</div>
+    </a>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider my-0">
+
+
+    {% if 'ADMIN' in user.librarystaffmoreinfo.position %}
+
+        <!-- Nav Item - Dashboard -->
+        <li class="nav-item active">        
+            <a class="nav-link" href="{% url 'admin_index' %}">
+                <i class="fas fa-fw fa-tachometer-alt"></i>
+            <span>Home</span></a>
+            
+        </li>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider">
+
+        <!-- Heading -->
+        <div class="sidebar-heading">
+            User Management
+        </div>
+
+        <!-- Nav Item - Pages Collapse Menu -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#staffPages"
+                aria-expanded="true" aria-controls="collapsePages">
+                <i class="fas fa-fw fa-user"></i>
+                <span>Staff</span>
+            </a>
+            <div id="staffPages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                
+                    <a class="collapse-item" href="{% url 'admin_add_staff' %}">Add Staff</a>
+                    <a class="collapse-item" href="{%  url 'admin_staff_list' %}">Staff List</a>
+                
+                    <div class="collapse-divider"></div>
+                </div>
+            </div>
+        </li>
+
+        <hr class="sidebar-divider">
+
+        <div class="sidebar-heading">
+            Book Management
+        </div>
+            <!-- Nav Item - Pages Collapse Menu -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#BookPages"
+                aria-expanded="true" aria-controls="collapsePages">
+                <i class="fas fa-fw fa-book"></i>
+                <span>Books</span>
+            </a>
+            <div id="BookPages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <!-- <h6 class="collapse-header">Login Screens:</h6> -->
+                    <a class="collapse-item" href="{% url  'admin_add_book' %}">Add book</a>
+                    <a class="collapse-item" href="{% url  'admin_book_list' %}">Book List</a>
+                    <a class="collapse-item" href="{% url 'book_borrow_list' %}">Book Borrow</a>
+                    <a class="collapse-item" href="{% url 'admin_add_classification' %}">Book Classification</a>
+                    <div class="collapse-divider"></div>
+                </div>
+            </div>
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#bookinventory"
+                aria-expanded="true" aria-controls="collapsePages">
+                <i class="fas fa-fw fa-book"></i>
+                <span>Inventory</span>
+            </a>
+            <div id="bookinventory" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <a class="collapse-item" href="{% url  'book_borrow_list' %}">Borrowed Books</a>
+                    <a class="collapse-item" href="{% url 'book_borrow_list' %}">Reserved Books</a>
+                    <a class="collapse-item" href="{% url 'admin_add_classification' %}">For Donation</a>
+                    <div class="collapse-divider"></div>
+                </div>
+            </div>
+        </li>
+
+
+        <!-- Divider -->
+        <hr class="sidebar-divider">
+
+        <!-- Heading -->
+        <div class="sidebar-heading">
+            Reservation Management
+        </div>
+    
+        <!-- Nav Item - Pages Collapse Menu -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#postPages"
+                aria-expanded="true" aria-controls="collapsePages">
+                <i class="fas fa-fw fa-calendar"></i>
+                <span>Reservation</span>
+            </a>
+            <div id="postPages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <!-- <h6 class="collapse-header">Login Screens:</h6> -->
+                    
+                    <a class="collapse-item" href="{% url 'admin_reservation_list' %}">List of Reservation</a>
+                    <a class="collapse-item" href="{% url 'scan_qr' %}">Scan</a>
+                    <div class="collapse-divider"></div>
+                </div>
+            </div>
+        </li>
+
+    <!-- 
+        <hr class="sidebar-divider">
+
+        
+        
+        <div class="sidebar-heading">
+            Reports Management
+        </div>
+
+
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#reportPages"
+                aria-expanded="true" aria-controls="collapsePages">
+                <i class="fas fa-fw fa-file"></i>
+                <span>Reports</span>
+            </a>
+            <div id="reportPages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <
+                
+                    <a class="collapse-item" href="#">List of Reservation</a>
+                    <a class="collapse-item" href="#">Scan</a>
+                    <div class="collapse-divider"></div>
+                </div>
+            </div>
+        </li> -->
+
+
+
+
+        <hr class="sidebar-divider">
+
+        
+        <!-- Heading -->
+        <div class="sidebar-heading">
+            Account Management
+        </div>
+
+
+
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#settingPages"
+                aria-expanded="true" aria-controls="collapsePages">
+                <i class="fas fa-fw fa-cog"></i>
+                <span>Settings</span>
+            </a>
+            <div id="settingPages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <!-- <h6 class="collapse-header">Login Screens:</h6> -->
+                
+                    <a class="collapse-item" href="{% url  'change_password' %}">Change Password</a>
+                    <!-- <a class="collapse-item" href="#">Update Profile</a> -->
+                    <div class="collapse-divider"></div>
+                </div>
+            </div>
+        </li>
+
+
+    {% elif 'STAFF' in user.librarystaffmoreinfo.position %}
+
+    <div class="sidebar-heading">
+        Book Management
+    </div>
+        <!-- Nav Item - Pages Collapse Menu -->
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#BookPages"
+            aria-expanded="true" aria-controls="collapsePages">
+            <i class="fas fa-fw fa-book"></i>
+            <span>Books</span>
+        </a>
+        <div id="BookPages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <!-- <h6 class="collapse-header">Login Screens:</h6> -->
+                <!-- <a class="collapse-item" href="{% url  'admin_add_book' %}">Add book</a> -->
+                <a class="collapse-item" href="{% url  'admin_book_list' %}">Book List</a>
+                <a class="collapse-item" href="{% url 'book_borrow_list' %}">Book Borrow</a>
+                <!-- <a class="collapse-item" href="{% url 'admin_add_classification' %}">Book Classification</a> -->
+                <div class="collapse-divider"></div>
+            </div>
+        </div>
+    </li>
+
+
+    <!-- Divider -->
+    <hr class="sidebar-divider">
+
+    <!-- Heading -->
+    <div class="sidebar-heading">
+        Reservation Management
+    </div>
+
+    <!-- Nav Item - Pages Collapse Menu -->
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#postPages"
+            aria-expanded="true" aria-controls="collapsePages">
+            <i class="fas fa-fw fa-calendar"></i>
+            <span>Reservation</span>
+        </a>
+        <div id="postPages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <!-- <h6 class="collapse-header">Login Screens:</h6> -->
+                
+                <!-- <a class="collapse-item" href="{% url 'admin_reservation_list' %}">List of Reservation</a> -->
+                <a class="collapse-item" href="{% url 'scan_qr' %}">Scan</a>
+                <div class="collapse-divider"></div>
+            </div>
+        </div>
+    </li>
+
+<!-- 
+    <hr class="sidebar-divider">
+
+    
+    
+    <div class="sidebar-heading">
+        Reports Management
+    </div>
+
+
+
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#reportPages"
+            aria-expanded="true" aria-controls="collapsePages">
+            <i class="fas fa-fw fa-file"></i>
+            <span>Reports</span>
+        </a>
+        <div id="reportPages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <
+            
+                <a class="collapse-item" href="#">List of Reservation</a>
+                <a class="collapse-item" href="#">Scan</a>
+                <div class="collapse-divider"></div>
+            </div>
+        </div>
+    </li> -->
+
+
+
+
+    <hr class="sidebar-divider">
+
+    
+    <!-- Heading -->
+    <div class="sidebar-heading">
+        Account Management
+    </div>
+
+
+
+
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#settingPages"
+            aria-expanded="true" aria-controls="collapsePages">
+            <i class="fas fa-fw fa-cog"></i>
+            <span>Settings</span>
+        </a>
+        <div id="settingPages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <!-- <h6 class="collapse-header">Login Screens:</h6> -->
+            
+                <a class="collapse-item" href="{% url  'change_password' %}">Change Password</a>
+                <!-- <a class="collapse-item" href="#">Update Profile</a> -->
+                <div class="collapse-divider"></div>
+            </div>
+        </div>
+    </li>
+
+
+    {% endif %}
+
+
+
+
+    <!-- Nav Item - Charts -->
+    <!-- <li class="nav-item">
+        <a class="nav-link" href="charts.html">
+            <i class="fas fa-fw fa-chart-area"></i>
+            <span>Charts</span></a>
+    </li> -->
+
+    <!-- Nav Item - Tables -->
+    <!-- <li class="nav-item">
+        <a class="nav-link" href="tables.html">
+            <i class="fas fa-fw fa-table"></i>
+            <span>Tables</span></a>
+    </li> -->
+
+    <!-- Divider -->
+    <hr class="sidebar-divider d-none d-md-block">
+
+    <!-- Sidebar Toggler (Sidebar) -->
+    <div class="text-center d-none d-md-inline">
+        <button class="rounded-circle border-0" id="sidebarToggle"></button>
+    </div>
+
+    <!-- Sidebar Message -->
+    <!-- <div class="sidebar-card d-none d-lg-flex">
+        <img class="sidebar-card-illustration mb-2" src="{% static 'administration/img/undraw_rocket.svg' %}" alt="...">
+        <p class="text-center mb-2"><strong>SB Admin Pro</strong> is packed with premium features, components, and more!</p>
+        <a class="btn btn-success btn-sm" href="https://startbootstrap.com/theme/sb-admin-pro">Upgrade to Pro!</a>
+    </div> -->
+
+</ul>

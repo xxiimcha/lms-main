@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  web:
+    build: 
+      context: ./
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./:/app
+    env_file:
+      - .env
+    depends_on:
+      - database
+  database:
+    build:
+      context: ./
+      dockerfile: db.Dockerfile
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./db.sqlite3:/db/db.sqlite3
+    # healthcheck:
+    #   test: ["CMD", "pg_isready", "-U", "postgres"]
+    #   interval: 5s
+    #   retries: 5
+    # environment:
+    #   - POSTGRES_USER=postgres
+    #   - POSTGRES_PASSWORD=postgres
+    #   - POSTGRES_DB=postgres  
+    
+    

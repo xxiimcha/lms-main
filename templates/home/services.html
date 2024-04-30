@@ -1,0 +1,278 @@
+{% extends 'base/main.html' %}
+{% load static %}
+
+
+{% block content %}
+
+
+    <section class="hero-section"   data-scrollax-parent="true">
+        <div class="bg-tabs-wrap">
+            <div class="bg-parallax-wrap" data-scrollax="properties: { translateY: '200px' }">
+                <div class="bg bg_tabs"  data-bg="{% static 'images/service_bg.jpg' %}"></div>
+                <div class="overlay op7"></div>
+            </div>
+        </div>
+        <div class="container small-container">
+            <div class="intro-item fl-wrap">
+                <!-- <span class="section-separator"></span> -->
+                <div class="bubbles">
+                    <h1>Services</h1>
+                </div>
+            </div>
+
+        </div>
+        
+
+    </section>
+
+
+    <!-- first section content -->
+    
+
+    <section>
+        <div class="container big-container">
+
+            <div class="section-title ">
+                <h2><span>Here's our services we offer</span></h2>
+                <!-- <div class="section-subtitle">Best Listings</div> -->
+                <span class="section-separator"></span>
+                <p class="services-title">Daniel Fajardo's Public Library  offer services for all students, readers and other client. You are welcome to visit us and serve you the best services you want. We glad to meet you!</p>
+                <!-- <p>Proin dapibus nisl ornare diam varius tempus. Aenean a quam luctus, finibus tellus ut, convallis eros sollicitudin turpis.</p> -->
+            </div>
+    
+           <div class="row">
+               <div class="col-lg-4 hvr-grow">
+                <div class="card  rounded p-4 service-item left-border-color">
+                    <div class="icon-service mb-3">
+                        <i class="fa-solid fa-book"></i>
+                    </div>
+                    <h3 class="fw-bold">Book Borrowing (Walk-In)</h3>
+                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Assumenda eius quisquam suscipit labore voluptate id hic non odit rerum aut excepturi tempora iure magnam perferendis at porro, sed minima officia?</p>
+                </div>
+               </div>
+
+
+               <div class="col-lg-4 hvr-grow">
+                <div class="card rounded p-4 service-item left-border-color">
+                    <div class="mb-3 icon-service">
+                        <i class="fa-solid fa-calendar-days"></i>
+                    </div>
+                    <h3 class="fw-bold">Book Reservation (Online)</h3>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda reiciendis asperiores fuga ratione nihil facere tenetur ut debitis labore dolorem, eveniet consequatur. Rerum dicta nisi totam, quidem officiis voluptate mollitia?</p>
+                </div>
+               </div>
+
+
+               <div class="col-lg-4 hvr-grow">
+                <div class="card rounded p-4 service-item left-border-color">
+                    <div class="mb-3 icon-service">
+                        <i class="fa-solid fa-hand-holding-hand"></i>
+                    </div>
+                    <h3 class="fw-bold">Book Donating (Email Inquiry)</h3>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae fugit eligendi eos in ut quia autem nemo vitae ab! Dolores voluptatum dolore natus esse facilis accusamus voluptatem ducimus suscipit error.</p>
+                </div>
+               </div>
+
+               <div class="mt-5">
+                    <p class="text-danger" style="font-size: 15px; font-weight:500"> <b> Reminder</b>: When borrowing of books  make sure to bring your ID that  will handed to person's in-charge of staff members of the public library</p>
+               </div>
+           </div>
+        </div>
+    </section>
+
+
+    <!-- <section class="p-0" style="background: #ed46bd;">
+        <div class="col-lg-12">
+            <div class="p-4">
+                <h2 class="text-white">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab, quibusdam!</h2>
+            </div>
+                
+        </div>
+    </section> -->
+
+
+    <section style="background-color: #fbd404;padding:30px 0;">
+        <div class="container">
+            <div class="section-title" style="padding-bottom: 0;">
+                <img class="section-img" src="/static/images/wearMask.png" alt="">
+                <h2 style="color: #FFF;;padding-bottom:0;font-weight:600;margin-bottom:30px;margin-top:20px">Wear a mask. Save lives.</h2>
+            </div>
+            <div class="row">
+                <div class="col-lg-3 col-md-3">
+                    <span class="material-icons size-large"> masks </span>
+                    <p class="icon-text fw-bold"> Wear a mask</p>
+                </div>
+                <div class="col-lg-3 col-md-3">
+                    <span class="material-icons size-large">
+                        clean_hands
+                    </span>
+                     <p class="icon-text fw-bold">  Clean your hands</p>
+                </div>
+                <div class="col-lg-3 col-md-3">
+                    <span class="material-icons size-large">
+                        social_distance
+                        </span>
+                    <p class="icon-text fw-bold">Keep a safe distance</p>
+                </div>
+                <div class="col-lg-3 col-md-3">
+                    <span class="material-icons size-large">
+                        vaccines
+                        </span>
+                        
+                    <p class="icon-text">Get vaccinated</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="slw-sec">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12">
+                    <div class="section-title pb-2">
+                        <h2 class="text-start fs-3" style="color: #ed46bd;"> <i class="fa-solid fa-clipboard-check"></i> Rules and Regulations</h2>
+                        <div class="row d-flex text-justify mt-4 text-start">
+                            <h5 class="text-danger">Follow this:</h5>
+
+                            <div class="row d-flex ms-3">
+                                <ul>
+                                    <li class="mb-3">
+                                        <p class="mb-0  mb-2">Always bring your valid ID when borrowing of books</p>
+                                    </li>
+                                    <li class="mb-3">
+                                        <p class="mb-0 mb-2">Always bring alcohol and wear facemask inside the library</p>
+                                    </li>
+                                    <li class="mb-3">
+                                        <p class="mb-0 mb-2"> Each client may only borrow a maximum of three to five (3-5) book at a time</p>
+                                    </li class="mb-3">
+                                    <li class="mb-3">
+                                        <p class="mb-0 mb-2"> Silence inside the library must be observed at all times</p>
+                                    </li>
+
+                                    <li class="mb-3">
+                                        <p class="mb-0 mb-2"> Smoking, eating, and talking loudly are stricly prohibited in the library</p>
+                                    </li>
+
+                                    <li class="mb-3">
+                                        <p class="mb-0 mb-2"> You can bring your own laptop, iPad, cellphones and other gadgets inside the library</p>
+                                    </li>
+
+                                    <li class="mb-3">
+                                        <p class="mb-0 mb-2" style="line-height: 25px;"> Anyone who violates the rules and regulations of the library would be a liable to lose privillage of the library and may be debbared from using the library facilities </p>
+                                    </li>
+                                </ul>
+
+
+                            </div>
+                        </div>
+
+                        <hr>
+                        
+
+                        <h2 class="text-start fs-3 mt-4" style="color: #ed46bd;"> <i class="fa-solid fa-clipboard-check"></i> Terms and Conditions</h2>
+                        <div class="row d-flex text-justify mt-4 text-start">
+                        <h5 class="ms-3" style="font-size: 20px;
+                        font-weight: normal;
+                        text-align: justify;
+                        line-height: 30px;">These Terms and Conditions describe the rights and obligations have when using the site, including all of the information, graphics, and services made available in Daniel Fajardo’s Public Library of Las Pinas. Before using the site, please read all the information’s carefully. You acknowledge and agree to these Terms by accessing any page on the website. Also, the consent extends to the gathering and use of data in accordance with the specific guidelines outlined in the privacy statement. Please don't use this site if you don't agree with these terms and conditions. You agree to be governed by these Terms by accessing, using, or registering for any service made available on this site.</h5>
+
+                            <div class="row d-flex ms-3 mt-2">
+                                
+                                <h5 class="mb-0  mb-2 terms_title"><span class="text-danger fw-bold">1:</span> Scope of terms</h5>
+                                <div class="ms-3">
+                                    <p class="terms_label">
+                                        You may not engage in any of the following activities on the website: (I) conduct any activity that is or may be unlawful, harmful, threatening, abusive, harassing, tortious, defamatory, vulgar, obscene, libelous, invading another person's privacy, hateful, or racially, ethnically, or otherwise objectionable; (II) conduct any activity that will or may violate the rights of a third party; (III) engage in commercial activities, Users who employ "robots," "spiders," or other automatic programs may use the website without restricting the generality of the aforementioned, but they are expressly forbidden from resending or diverting information without the prior written consent of the library.
+                                    </p>
+                                </div>
+
+
+                                <h5 class="mb-0  mb-2 terms_title"><span class="text-danger fw-bold">2:</span> Third Party Internet Websites and Content</h5>
+                                <div class="ms-3">
+                                    <p class="terms_label">
+                                        Everyone who visits the library, whether online or at a nearby branch location, has access to the Internet as a convenience only. Although the Library does review, choose, and catalog a few Third-Party Sites (as defined below) by subject matter for inclusion both without and in links within our online catalog, you acknowledge and understand that the library does not screen or filter access to the World Wide Web through the Site and does not oversee or monitor the links on the Site to Third-Party Computer Systems and Websites (collectively, the "Third Party Sites").
+                                    </p>
+                                </div>
+
+
+
+                                <h5 class="mb-0  mb-2 terms_title"><span class="text-danger fw-bold">3:</span> Copyright</h5>
+                                <div class="ms-3">
+                                    <p class="terms_label">
+                                        You are allowed to access and view the text, images, sounds, music, charts, and other materials (collectively referred to as "Library Content") on the website for your own private, non-commercial use only. Such a privilege may be revoked by the library at any time, with or without warning, and for any reason or no reason at all. All library software, other works, and copies of any of the aforementioned (collectively, "Works") are protected by copyright laws and treaty provisions in the Public Library of Las Pinas. They are all the property of the library and/or its suppliers. The library does not give you any further rights or privileges in relation to any of the works except from the restricted access to and viewing of the library content described above. You acknowledge that any additional uses of the works, such as without limitation, translation, reverse engineering, decomplicating or disassembling, making derivative works, exporting, selling, licensing, renting, leasing, transferring, or otherwise transferring rights to the works, or removing any proprietary notices or labels on the works, are prohibited without the prior written permission of the author. Depending on the nature of the requested use, the library may grant or deny permission on an individual basis and charge a usage fee.
+                                    </p>
+                                </div>
+
+
+                                <h5 class="mb-0  mb-2 terms_title"><span class="text-danger fw-bold">4:</span> Trademarks</h5>
+                                <div class="ms-3">
+                                    <p class="terms_label">
+                                        Page headers, custom graphics, logos, and button icons are all service marks, trademarks, and/or trade dress of the library (collectively, the "Marks"). The library also owns all other service marks and trademarks. Without the library's prior written approval, you undertake not to display, use, or duplicate any of the Marks. Without limiting the extent of the aforementioned, the library expressly forbids the use of any Mark as a "hot" link to the Site unless the creation of such a connection has received prior written approval from the library. The library shall be entitled to seek an injunction against such usage if such approval is not obtained. All other product names, company names, service marks, trademarks, and logos that are mentioned or displayed on the website are the property of their respective owners.
+                                    </p>
+                                </div>
+
+
+
+
+                                <h5 class="mb-0  mb-2 terms_title"><span class="text-danger fw-bold">5:</span> Privacy Policy</h5>
+                                <div class="ms-3">
+                                    <p class="terms_label">
+                                        A privacy statement that outlines users' rights and obligations with regard to personal information revealed on this site has been established by the library because it values its patrons' right to privacy. Look at our Privacy Statement.
+                                    </p>
+                                </div>
+
+
+
+                                <h5 class="mb-0  mb-2 terms_title"><span class="text-danger fw-bold">6:</span> Disclaimer of Warranties</h5>
+                                <div class="ms-3">
+                                    <p class="terms_label">
+                                        The site would be only meant to be used at your personal responsibility. The library hereby expressly disclaims any and all express and implied representations and warranties, including any warranties of availability, non-interception, freedom from viruses, accuracy, reliability, correctness, timeliness, completeness, non-infringement, merchantability, or fitness for a particular purpose, with regard to the content, the site, and the products and services provided by the site. You understand and agree that the provisions of this section 6 and all other disclaimers in these Terms reflect a just and reasonable division of risk between you and the library.
+                                    </p>
+                                </div>
+
+
+
+
+                                <h5 class="mb-0  mb-2 terms_title"><span class="text-danger fw-bold">7:</span> Feedback</h5>
+                                <div class="ms-3">
+                                    <p class="terms_label">
+                                        You hereby grant the library permission to accept and use any ideas or suggestions you submit about how to enhance the website or the library's offerings without further compensation. Any information you send the library via email or another method will be regarded as having been given voluntarily and received by the library on a non-confidential basis. 
+                                    </p>
+                                </div>
+
+
+
+                                <h5 class="mb-0  mb-2 terms_title"><span class="text-danger fw-bold">8:</span> Compliance</h5>
+                                <div class="ms-3">
+                                    <p class="terms_label">
+                                        The library does not represent or guarantee that any of the content on the website is suitable for download outside of the Daniel Fajardo’s Public Library of Las Pinas. It might not be legal for some people or in some countries to access the website or any of the information included on it. You do so at your own risk of liability under the laws of the Public Library institution or your jurisdiction if you access the site from outside of the public library. 
+                                    </p>
+                                </div>
+
+
+
+                                <h5 class="mb-0  mb-2 terms_title"><span class="text-danger fw-bold">9:</span> Miscellaneous</h5>
+                                <div class="ms-3">
+                                    <p class="terms_label">
+                                        This Agreement includes all prior written or oral agreements, representations, and understandings and, together with our Privacy Statement, sets forth the complete understanding between you and the library. Without the library's prior written consent, you may not modify or amend these Terms. Without giving you prior notice, the library has the right to change or update both these Terms and the Privacy Statement at any time. As your continuous use of the site following a change or amendment denotes your assent and agreement to these Terms, as modified, you should frequently review these Terms for any modifications or amendments. You understand and agree that if any clause or provision contained in these Terms is found to be unlawful, invalid, or unenforceable under current or future law, such clause or provision shall be deemed severable without impairing the enforceability of any other terms or provisions. 
+                                    </p>
+                                </div>
+
+
+
+                            </div>
+
+                        </div>
+
+
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+{% endblock %}

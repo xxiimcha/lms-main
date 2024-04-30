@@ -1,0 +1,6 @@
+{% autoescape off %}  
+Hi {{ user.get_full_name }},  
+Please click on the link to confirm your registration,
+http://{{ domain }}{% url 'email_verification' uidb64=uid token=token %}  
+If you think, it's not you, then just ignore this email.  
+{% endautoescape %}

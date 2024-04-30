@@ -1,0 +1,120 @@
+{% extends 'administration/base/main.html' %}
+{% load static %}
+
+{% load widget_tweaks %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-header bg-primary text-white">STAFF DETAILS</div>
+                    <div class="card-body">
+                        
+                        <form action="" method="POST">
+                            {% csrf_token %}
+                            <!-- {{form.as_p}} -->
+                            <div class="row gx-3 mb-3">
+                                <div class="col-md-4">
+                                    {{form.first_name.errors}} 
+                                    <label for="id_first_name">First Name*</label>
+                                    {{form.first_name}}
+                                </div>
+                                <div class="col-md-4">
+                                    {{form.middle_name.errors}} 
+                                    <label for="id_middle_name">Middle Name</label>
+                                    {{form.middle_name}}
+                                </div>
+                                <div class="col-md-4">
+                                    {{form.last_name.errors}} 
+                                    <label for="id_last_name">Last Name*</label>
+                                    {{form.last_name}}
+                                </div>
+                               
+                            </div>
+
+                            <div class="row gx-3 mb-3">
+                                <div class="col-md-6">
+                                {{form.birth_date.errors}} 
+                                <!-- <label for="id_position">Position</label> -->
+                                {{form.birth_date|as_crispy_field}}
+                                </div>
+                                <div class="col-md-6">
+                                    {{form.birth_place.errors}} 
+                                    <!-- <label for="id_position">Position</label> -->
+                                    {{form.birth_place|as_crispy_field}}
+                                </div>
+                               
+                                                               
+                            </div>
+    
+                            <div class="mb-3">
+                                    <label for="id_email">Email*</label>
+                                    {% if form.errors %}
+                                        {{form.email|add_class:"form-control is-invalid"}}
+                                    {% else %}
+                                        {{form.email}}
+                                    {% endif %}
+                                    <div class="invalid-feedback">
+                                        {{form.email.errors}} 
+                                    </div>
+                            </div>
+    
+                            <div class="mb-3">
+                                <!-- {{form.password1.errors}}  -->
+                                
+                                <label for="id_password1">Password*</label>
+                                
+                                {% if form.errors %}
+                                    {{form.password1|add_class:"form-control is-invalid"}}
+                                {% else %}
+                                    {{form.password1}}
+                                {% endif %}
+                                <div class="invalid-feedback">
+                                    {{form.password2.errors}} 
+                                </div>
+                            </div>
+                        
+                            <div class="mb-3"> 
+                                <label for="id_password2">Password Confirmation*</label>
+                                {% if form.errors %}
+                                    {{form.password2|add_class:"form-control is-invalid"}}
+                                {% else %}
+                                    {{form.password2}}
+                                {% endif %}
+                                <div class="invalid-feedback">
+                                    {{form.password2.errors}} 
+                                </div>
+                            </div>
+
+                            <!-- <div class="mb-3">
+                                {{form.department.errors}} 
+                                <label for="id_department">Department</label>
+                                {{form.department}}
+                            </div> -->
+
+
+                            <div class="mb-3">
+                                {{form.position.errors}} 
+                                <!-- <label for="id_position">Position</label> -->
+                                {{form.position|as_crispy_field}}
+                            </div>
+                            
+
+                            <div class="mb-3">
+                                {{form.date_hired.errors}} 
+                                <!-- <label for="id_position">Position</label> -->
+                                {{form.date_hired|as_crispy_field}}
+                            </div>
+                            <!-- {{form.password1.errors}} -->
+                            <button type="submit" class="btn btn-success float-end">Add Staff</button>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

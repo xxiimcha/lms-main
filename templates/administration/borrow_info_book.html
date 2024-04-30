@@ -1,0 +1,110 @@
+{% extends 'administration/base/main.html' %}
+{% load static %}
+
+{% load widget_tweaks %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+    <div class="container-fluid">
+
+       
+        <!-- <div class="row">
+            <div class="col-lg-6">
+                <div class="card shadow mb-4">
+                    <div class="card-header bg-primary py-3">
+                        <h6 class="m-0 font-weight-bold text-white">Borrower Information</h6>
+                    </div>
+                    <div class="card-body">
+                        {{reservations|first}}
+
+                       
+                    </div>
+                </div>
+            </div>
+        </div> -->
+       
+
+
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="card shadow mb-4">
+                    <div class="card-header bg-success py-3">
+                        <h6 class="m-0 font-weight-bold text-white">Reservation details</h6>
+                    </div>
+                    <div class="card-body">
+                        
+                        
+                        {% regroup reservations by reservee.get_full_name as reservation_list %}
+                        <ul>
+
+                            {%for reservation in reservation_list %}
+                                    
+                                <li>Reserved by: {{reservation.grouper}}
+                                    <ul>
+                                        {% for data in reservation.list %}
+                                            <li>
+                                                Book: 
+                                                <h6>{{data.book}}</h6>
+                                            
+                                                Reservation Date:
+                                                <h6>Date: {{data.date_reservation}}</h6>
+                                            </li>
+                                        {% endfor %}
+
+                                    </ul>
+                                </li>
+
+                            {% endfor %}
+                        </ul>
+                       
+                    </div>
+                </div>
+
+
+
+
+
+                
+            </div>
+
+            <div class="col-lg-6">
+                <div class="card shadow mb-4">
+                    <div class="card-header bg-primary py-3">
+                        <h6 class="m-0 font-weight-bold text-white">Interlibrary loan details</h6>
+                    </div>
+                    <div class="card-body">
+                        <h6>Number of book(s) to borrow: {{reservations|length}}</h6>
+                        {% regroup reservations by reservee.get_full_name as reservation_list %}
+
+                         {%for reservation in reservation_list %}
+
+                            <h6>Person to Borrow: {{reservation.grouper}}</h6>
+
+                         {% endfor %}
+
+                         <hr>
+
+                        <h6 class="text-danger">(*) Important field, must be filled up</h6>
+
+                       <form method="post">
+                        {% csrf_token %}
+
+                        {{form|crispy}}
+
+                        
+
+                        <button class="btn btn-primary btn-block">Process Transaction</button>
+
+                       </form>
+
+
+                       <hr>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+{% endblock %}

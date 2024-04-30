@@ -1,0 +1,166 @@
+{% extends 'base/main.html' %}
+{% load static %}
+
+
+{% block content %}
+       <!--section  -->
+       <section class="hero-section"   data-scrollax-parent="true">
+        <div class="bg-tabs-wrap">
+            <div class="bg-parallax-wrap" data-scrollax="properties: { translateY: '200px' }">
+                <div class="bg bg_tabs"  data-bg="{% static 'images/library-bg.jpg' %}"></div>
+                <div class="overlay op7"></div>
+            </div>
+        </div>
+        <div class="container small-container">
+            <div class="intro-item fl-wrap">
+                <!-- <span class="section-separator"></span> -->
+                <div class="bubbles">
+                    <h1>About Us</h1>
+                </div>
+                <h3>“TO INSPIRE, CREATE, DREAM, AND LEARN.”</h3>
+            </div>
+
+        </div>
+         
+  
+    </section>
+    <!--section end-->
+
+
+
+
+    <section>
+        <div class="container big-container">
+            <div class="section-title">
+                <h2><span>History</span></h2>
+                <div class="section-subtitle">Best Listings</div>
+                <span class="section-separator"></span>
+                <!-- <p>Proin dapibus nisl ornare diam varius tempus. Aenean a quam luctus, finibus tellus ut, convallis eros sollicitudin turpis.</p> -->
+            </div>
+    
+           <div class="row">
+               <div class="col-lg-6">
+                    <h1 class="text-start history-title fst-italic">Our History</h1>
+                    <p class="history-text">The Public Library of Las Piñas was established in year 1963 under the administration of Mayor Francisco Antonio. It was first placed on the second level of the old municipal building and had only a few reference books and reference materials. Employees were the most frequent users of the library, but students frequently went there to fill their time with the scant materials provided by Rizal's Provincial Library. Well-intention residents who saw the value of the Public Library gave whatever books they could spare and it wasn't long before others followed in, supplying the library with more reading materials, allowing it to expand its services to an increasing number of library patrons. When Mayor Filemon C. Aguilar took office, he made the municipal Public Library be one of his top priorities, purchasing helpful books, magazines, and foreign reading materials for the growing number of people who read. He also suggested that the Public Library be housed in its own building, which would serve not only for students, but also researchers, office employees, and regular patrons.</p>
+               </div>
+               <div class="col-lg-6 d-flex justify-content-center align-items-center">
+                  
+                        <img src="{% static 'images/bg-lib.jpg' %}" alt="" class="img-fluid">
+                  
+                  
+               </div>
+           </div>
+        </div>
+    </section>
+
+
+
+
+    <section>
+        <div class="container big-container">
+            <div class="section-title">
+                <h2><span>Our Staff</span></h2>
+                <h2><span>“To develop network and linkages worldwide, on a national scale, and locally that share the same objectives.”</span>
+                <div class="section-subtitle">Best Listings</div>
+                <span class="section-separator"></span>
+                <!-- <p>“To develop network and linkages worldwide, on a national scale, and locally that share the same objectives.”</p> -->
+            </div>
+
+            <div class="row">
+                
+                    <div class="row d-flex justify-content-evenly">
+                        <div class="card p-4 shadow" style="width: 18rem;">
+                            <!-- <h6 class="card-header">Title here</h6> -->
+                            <img src="{% static 'images/OIC.jpg' %}" class="card-img-top">
+                            <div class="card-body">
+                                <h5 class="card-title"><Office-in-Charge>Adora R. Gorospe</Office-in-Charge>
+                                <h6 style="color:#f870d1" class="fw-bold"><Office-in-Charge>Office in Charge (OIC)</Office-in-Charge></h6>
+                                <p class="fs-5 mb-0">Library Staff</p>
+
+                            </div>
+                        </div>
+
+
+                        <div class="card p-4 shadow" style="width: 18rem;">
+                            <!-- <h6 class="card-header">Title here</h6> -->
+                            <img src="{% static 'images/Maricel O. Montano.png' %}" class="card-img-top">
+                            <div class="card-body">
+                                <h5 class="card-title">Maricel O. Montano</h5>
+                                <h6 style="color:#f870d1" class="fw-bold">Reference Custodian</h6>
+                                <h6 style="color:#f870d1" class="fw-bold">and Story Teller</h6>
+                                <p class="fs-5 mb-0">Library Staff</p>
+                            </div>
+                        </div>
+
+
+
+                        <div class="card p-4 shadow" style="width: 18rem;">
+                            <!-- <h6 class="card-header">Title here</h6> -->
+                            <img src="{% static 'images/Anthony C. Quilatan.jpg' %}" class="card-img-top">
+                            <div class="card-body">
+                                <h5 class="card-title">Anthony C. Quilatan</h5>
+                                <h6 style="color:#f870d1;" class="fw-bold">Utility</h6>
+                                <h6 style="color:#f870d1;" class="fw-bold"> and Story Teller</h6>
+                                <p class="fs-5 mb-0">Library Staff</p>
+                            </div>
+                        </div>
+                        <div class="card p-4 shadow" style="width: 18rem;">
+                            <!-- <h6 class="card-header">Title here</h6> -->
+                            <img src="{% static 'images/Myra C. Libay.jpg' %}" class="card-img-top">
+                            <div class="card-body">
+                                <h5 class="card-title">Myra C. Libay</h5>
+                                <h6 style="color:#f870d1" class="fw-bold">Children Section Custodian </h6>
+                                <h6 style="color:#f870d1" class="fw-bold">and Story Teller</h6>
+                                <p class="fs-5 mb-0">Library Staff</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+            </div>
+
+            <div class="row d-flex mt-5 justify-content-center">
+                        <!-- <div class="card p-4 shadow" style="width: 15rem;">
+                            
+                            <img src="{% static 'images/Ma. Estalla R. Nadal.png' %}" class="card-img-top">
+                            <div class="card-body">
+                                <h5 class="card-title">Ma. Estella R. Nadal</h5>
+                                <h6 style="color:#f870d1" class="fw-bold">Story Teller</h6>
+                                
+                            </div>
+                        </div> -->
+
+                        <div class="card p-4 shadow me-5" style="width: 15rem;">
+                            <!-- <h6 class="card-header">Title here</h6> -->
+                            <img src="{% static 'images/Dulce T. Callo.jpg' %}" class="card-img-top">
+                            <div class="card-body">
+                                <h5 class="card-title">Dulce Amor T. Callo</h5>
+                                <h6 style="color:#f870d1" class="fw-bold">Reference Custodian  </h6>
+                                <!-- <p class="fs-5 mb-0">Library Staff</p> -->
+                            </div>
+                        </div>
+
+                        <div class="card p-4 shadow" style="width: 15rem;">
+                            <!-- <h6 class="card-header">Title here</h6> -->
+                            <img src="{% static 'images/Rodolfo T. Arevalo.jpg' %}" class="card-img-top">
+                            <div class="card-body">
+                                <h5 class="card-title">Rodolfo Arevalo</h5>
+                                <h6 style="color:#f870d1" class="fw-bold">Utility</h6>
+                                <h6 style="color:#f870d1" class="fw-bold">and Story Teller</h6>
+                                <!-- <p class="fs-5 mb-0">Library Staff</p> -->
+                            </div>
+                        </div>
+
+            </div>
+            <!-- <div class="listing-filters gallery-filters fl-wrap">
+                <a href="#" class="gallery-filter  gallery-filter-active" data-filter="*">All Categories</a>
+                <a href="#" class="gallery-filter" data-filter=".restaurant">Restaurants </a>
+                <a href="#" class="gallery-filter" data-filter=".hotels">Hotels</a>
+                <a href="#" class="gallery-filter" data-filter=".events">Events</a>
+                <a href="#" class="gallery-filter" data-filter=".fitness">Fitness</a>
+            </div> -->
+           
+            <!-- <a href="listing.html" class="btn  dec_btn  color2-bg">View all</a> -->
+        </div>
+    </section>
+
+{% endblock %}

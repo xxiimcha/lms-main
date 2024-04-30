@@ -1,0 +1,81 @@
+{% load static %}
+
+
+<footer class="main-footer fl-wrap ">
+              
+    <!--footer-inner-->
+    <div class="footer-inner   fl-wrap">
+        <div class="container">
+            <div class="row">
+                <!-- footer-widget-->
+                <div class="col-md-4">
+                    <div class="footer-widget fl-wrap">
+                        <div class="footer-logo"><a href="#"><img src="{% static 'images/logo-library.jpg' %}" alt=""></a></div>
+                    </div>
+                </div>
+                <!-- footer-widget end-->
+                <!-- footer-widget-->
+                <div class="col-md-4">
+                    <div class="footer-widget fl-wrap">
+                        <div class="footer-contacts-widget fl-wrap">
+                            <p class="fw-bold fs-6 contact-margin fs-4">Contact</p>
+                            <hr class="text-light">
+                            <!-- <p>In ut odio libero, at vulputate urna. Nulla tristique mi a massa convallis cursus. Nulla eu mi magna. Etiam suscipit commodo gravida.   </p> -->
+                            <ul  class="footer-contacts fl-wrap no-list-style">
+                                <li class="fs-6"><span><i class="fal fa-envelope"></i> Mail :</span><a href="#" target="_blank">jenettejoyceanapi@gmail.com</a></li>
+                                <li class="fs-6"> <span><i class="fal fa-map-marker"></i> Address :</span><a href="#" target="_blank">Pedro Diego Cera Avenue Daniel Fajardo, Bamboo Organ Las Piñas City, Philippines, 1740.</a></li>
+                                <li class="fs-6"><span><i class="fal fa-phone"></i> Phone :</span><a href="#"> 09634733756 </a></li>
+                                <li class="fs-6"><span><i class="fal fa-phone"></i> Landline :</span><a href="#">(8)4752619, (8) 47543051</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!-- footer-widget end-->
+
+
+                <div class="col-md-4">
+                    <div class="footer-widget fl-wrap ">
+                        <div class="footer-contacts-widget fl-wrap">
+                            <p class="fw-bold fs-6 emergency-margin fs-4">SiteMap</p>
+                            <hr class="text-light">
+                            <!-- <p>In ut odio libero, at vulputate urna. Nulla tristique mi a massa convallis cursus. Nulla eu mi magna. Etiam suscipit commodo gravida.   </p> -->
+                            <ul  class="footer-contacts fl-wrap no-list-style d-flex">
+                                <div class="row">
+                                    <div class="justify-content-evenly">
+                                        <li class="fs-6"> <b> <a href="{% url 'home' %}"> Home </a></b></li>
+                                        <li class="fs-6"> <b><a href="{% url 'home_menu' %}"> Menu </a></b></li>
+                                        <li class="fs-6"> <b><a href="{% url 'about' %}">About</a></b></li>
+                                        <li class="fs-6"> <b><a href="{% url 'home_services' %}">Services</a></b></li>
+                                    </div>
+                                    
+                                </div>
+                               
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!-- footer-widget end-->
+               
+            </div>
+        </div>
+        <!-- footer bg-->
+        <div class="footer-bg" data-ran="4"></div>
+        <div class="footer-wave">
+            <svg viewbox="0 0 100 25">
+                <path fill="#fff" d="M0 30 V12 Q30 17 55 12 T100 11 V30z" />
+            </svg>
+        </div>
+        <!-- footer bg  end-->
+    </div>
+    <!--footer-inner end -->
+    <!--sub-footer-->
+    <div class="sub-footer  fl-wrap" style="background-color: #fbd404"> <!-- #fbd404 #ed46bd-->
+        <div class="container">
+            <div class="row">
+                <div class="copyright text-center" style="top: 0;font-size: 16px;font-weight: 600;"> &#169; Daniel Fajardo Public Library 2023 .  All rights reserved.</div>
+            </div>
+            
+        </div>
+    </div>
+    <!--sub-footer end -->
+</footer>

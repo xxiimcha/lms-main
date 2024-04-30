@@ -1,0 +1,39 @@
+{% extends 'administration/base/main.html' %}
+{% load static %}
+
+{% load widget_tweaks %}
+{% load crispy_forms_tags %}
+
+
+
+{% block content %}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-header bg-primary text-white">Change Password</div>
+                <div class="card-body">
+                    
+                    <form  method="POST">
+                        {% csrf_token %}
+
+                        {% if form_password.errors %}
+                            <p style="color: red;">
+                                Please correct the error{{ form_password.errors|pluralize }} below.
+                            </p>
+                        {% endif %}
+                        {{form_password|crispy}}
+
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                            <input type="submit" value="Save changes" class="btn btn-success">
+                        </div>
+                        
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

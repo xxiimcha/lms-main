@@ -1,0 +1,198 @@
+{% extends 'administration/base/main.html' %}
+{% load static %}
+
+
+
+{% block content %}
+
+
+    <div class="container-fluid">
+        <div class="card shadow">
+            <div class="card-header bg-success">
+                <h6 class="mb-0 text-white font-weight-bold">Scan QR Code here</h6>
+            </div>
+            <div class="card-body">
+                
+                <div class="row">
+                    <div class="col-lg-6">
+                        <label for="reader" class="font-weight-bold text-primary">QRCODE SCANNER</label>
+                        <div id="reader"></div>
+                    </div>
+                    <div class="col-lg-6">
+                        <form action="" method="POST" id="searchForm" autocomplete="off">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <label for="result_for_QR" class="font-weight-bold text-primary">QRCODE RESULT</label>
+                                <input type="text" class="form-control" value="QRCODE" name="result" id="result_for_QR" placeholder="QR CODE HERE">
+            
+                            </div>
+                        </form>
+                    
+                        <hr>
+
+                        <div class="card border border-primary">
+                            <div class="card-header">
+                                <h3 class="text-primary mb-0">Book Reservation information</h6>
+                                <div id="testresult">
+
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <h3 id="name_reservee_qr">name here</h3>
+                                <hr>
+                                <div id="resultqr">
+
+                                </div>
+                
+                                <div class="mb-2">
+                                    <a class="btn btn-lg btn-primary btn-block" id="claim_reservation">Claim Reservation</a>
+                                </div>
+                              
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>               
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+
+
+
+{% block script %}
+
+<script>
+    //  {# {% url 'search_social' %} #} 
+    const url = window.location.href;    
+    const searchForm =  document.getElementById('searchForm');
+    const searchInput = document.getElementById('result_for_QR');
+
+    const result = document.getElementById('resultqr');
+    const claim_button  =  document.getElementById("claim_reservation");
+    const name_reservee =  document.getElementById("name_reservee_qr");
+
+    var test_result =  document.getElementById('testresult');
+
+    const csrf = document.getElementsByName('csrfmiddlewaretoken')[0].value
+
+    var html_result = '';
+
+    function searchQr(qr){
+        $.ajax({
+            dataType: "json",
+            type : 'POST',
+            url : "{% url 'search_qr' %}",
+            data :{
+                'csrfmiddlewaretoken' : csrf,
+                'qr' : qr,
+            },
+            success: (res) =>{
+                //console.log(res.data)
+                const data = res.data
+                //console.log(data)
+                
+                if(Array.isArray(data)){
+                    result.innerHTML = ""
+                           
+
+
+                    let show_qr_data = data.map(qr =>{
+                        name_reservee.style.display = "block";
+                        name_reservee.textContent = "Reservee Name: " + qr.reservee;
+                        return `
+
+                           
+
+
+                            <div class="mb-2">
+                                <h3 class="text-dark">Book: ${qr.book}  </h3>
+                            </div>
+
+
+                            <div class="mb-2">
+                                <h3 class="text-dark">Date of Reservation: ${qr.reservation_date} </h3>
+                            </div>
+
+
+                            <div class="mb-2">
+                                <h3 class="text-dark">Status: ${qr.status} </h3>
+                            </div>
+
+
+                            
+                            <hr>
+
+                           
+
+
+                        `
+                    });
+
+                    result.innerHTML = show_qr_data.join('\n');
+                    claim_button.style.display = "block"
+                    claim_button.setAttribute("href",`/administration/book_borrow_info/${searchInput.value}`)
+                    
+                }
+                else{
+                    if(searchInput.value.length > 0){
+                        result.innerHTML = `<b>${data}</b>`        
+                        console.log(data)
+                    }
+                }
+            },
+            error : (err) => {
+                console.log(err)
+            }
+        })
+    }
+
+
+    //searchInput.addEventListener('change', e =>{
+      //  console.log(e.target.value)
+
+        //searchQr(e.target.value)
+        //searchQr(e.target.value)
+    //})
+
+
+
+    function onScanSuccess(decodedText, decodedResult) {
+        var lastResult, countResults = 0;
+        var qrcode;
+        // Handle on success condition with the decoded text or result.
+        if(decodedText !== lastResult){
+            ++countResults;
+            lastResult = decodedText
+            //document.getElementById("result").textContent = lastResult;
+            qrcode = document.getElementById("result_for_QR").value = lastResult;
+            searchQr(qrcode)
+            html5QrcodeScanner.clear();
+            //console.log(`Scan result: ${decodedText}`, decodedResult);
+            //console.log(searchInput.value)
+
+
+            /* var shutter = new Audio();
+            shutter.autoplay = true;
+            shutter.src = navigator.userAgent.match(/Firefox/) ? 'beep.ogg' : 'beep.mp3'; */
+        }
+        
+    }
+    var html5QrcodeScanner = new Html5QrcodeScanner(
+        "reader", { fps: 10, qrbox: 250 });
+    html5QrcodeScanner.render(onScanSuccess);    
+    
+    
+
+
+    //post submit qrcode
+
+    
+
+    
+
+    </script>
+
+{% endblock %}

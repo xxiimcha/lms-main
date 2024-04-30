@@ -1,0 +1,112 @@
+{% extends 'administration/base/main.html' %}
+{% load static %}
+
+
+{% block content %}
+
+
+<div class="container-fluid">
+    <div class="card card-show mb-4">
+        <div class="card-header bg-primary py-3">
+            <h6 class="m-0 font-weight-bold text-white">List of Reservation</h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable2">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Book</th>
+                            <th>Reservee ID</th>
+                            <th>Reservee</th>
+                            <th>Date of Reservation</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for reservation in reservations %}
+                        <tr>
+                            <td>{{forloop.counter}}</td>
+                            <td>{{reservation.book.title}}</td>
+                            <td>{{reservation.reservee.pk}}</td>
+                            <td>{{reservation.reservee.first_name}} {{reservation.reservee.last_name}} </td>
+                            <td>{{reservation.date_reservation}}</td>
+                            <td>{{reservation.status}}</td>
+                            <td >
+                                <div>
+                                    <a href="{% url 'approved_reservation' reservation.id %}" class="btn btn-outline-success btn-sm">Approve</a>
+                                    <a href="{% url 'declined_reservation' reservation.id %}" class="btn btn-outline-danger btn-sm">Decline</a>
+                                </div>
+                                
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+
+                </table>
+            </div>
+        </div>
+    </div>
+    
+
+    <!-- <div class="card card-show mb-4">
+        <div class="card-header bg-success py-3">
+            <h6 class="m-0 font-weight-bold text-white">Approved Reservations</h6>
+        </div>
+        <div class="card-body">
+            <h3>Reservations</h3>
+
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable2">
+                    <thead>
+                        <tr>
+                            <th>No.</th>
+                            <th>Book</th>
+                            <th>Reservee</th>
+                            <th>Date of reservation</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    
+                    <tbody>
+                        {% for approved in approved_list %}
+                        <tr>
+                            <td>{{forloop.counter}}</td>
+                            <td>{{approved.book.title}}</td>
+                            <td>{{approved.reservee.first_name}} {{approved.reservee.last_name}} </td>
+                            <td>{{approved.date_reservation}}</td>
+                            <td>
+                                <a href="/administration/borrowed_reservation/test?param_reservation={{approved.id}}" class="btn btn-outline-primary btn-sm">Claim Reservation</a>    
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div> -->
+</div>
+
+{% endblock %}
+
+
+{% block script %}
+
+    <script>
+        $(document).ready( function () {
+            $('#dataTable2').DataTable({
+                order: [[4,'asc']],
+                rowGroup: {
+                    startRender: null,
+                    endRender: function (rows, group){
+                        return ' '+ rows.data()[0][3]+' ('+rows.count()+' books)';
+                    },
+                    dataSrc:2
+                },
+                columnDefs : [{targets: 2, visible: false,searchable: false,}]
+            });
+        } );
+    </script>
+
+{% endblock %}

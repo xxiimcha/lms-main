@@ -1,0 +1,6 @@
+[
+  {
+    "type": "sqlite",
+    "path": "d:\\Github\\library-system-main\\db.sqlite3"
+  }
+]

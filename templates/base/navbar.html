@@ -1,0 +1,115 @@
+{% load static %}
+
+
+<header class="main-header home-main-header">
+    <!-- logo-->
+    <a href="{% url 'home' %}" class="logo-holder home-logo">
+        <img src="{% static 'images/logo-library.jpg' %}" alt="">
+        <h1>DANIEL FAJARDO LAS PIÑAS PUBLIC LIBRARY</h1>
+    </a>
+    <!-- logo end-->
+    <!-- header-search_btn-->         
+    <!-- <div class="header-search_btn show-search-button"><i class="fal fa-search"></i><span>Search</span></div> -->
+    <!-- header-search_btn end-->
+    <!-- header opt --> 
+    <!-- <a href="dashboard-add-listing.html" class="add-list color-bg">Add Listing <span><i class="fal fa-layer-plus"></i></span></a>
+    <div class="cart-btn   show-header-modal" data-microtip-position="bottom" role="tooltip" aria-label="Your Wishlist"><i class="fal fa-heart"></i><span class="cart-counter green-bg"></span> </div>
+    <div class="show-reg-form modal-open avatar-img" data-srcav="images/avatar/3.jpg"><i class="fal fa-user"></i>Sign In</div> -->
+    <!-- header opt end--> 
+    <!-- lang-wrap-->
+    <!-- <div class="lang-wrap">
+        <div class="show-lang"><span><i class="fal fa-globe-europe"></i><strong>En</strong></span><i class="fa fa-caret-down arrlan"></i></div>
+        <ul class="lang-tooltip lang-action no-list-style">
+            <li><a href="#" class="current-lan" data-lantext="En">English</a></li>
+            <li><a href="#" data-lantext="Fr">Français</a></li>
+            <li><a href="#" data-lantext="Es">Español</a></li>
+            <li><a href="#" data-lantext="De">Deutsch</a></li>
+        </ul>
+    </div> -->
+    <!-- lang-wrap end-->                                 
+    <!-- nav-button-wrap 
+    <div class="nav-button-wrap color-bg">
+        <div class="nav-button">
+            <span></span><span></span><span></span>
+        </div>
+    </div> -->
+    <!-- nav-button-wrap end-->
+    <!--  navigation --> 
+    <div class="nav-holder main-menu ">
+        <nav>
+            <ul class="no-list-style">
+                <li>
+                    {% url 'home' as home_url %}
+                    <a href="{{ home_url }}" {% if request.get_full_path == home_url %}  class="act-link" {% endif %}>Home</a>   
+                  
+                    <!--second level end-->
+                </li>
+                <li>
+                    {% url 'home_menu' as menu_url %}
+                    <a href="{{ menu_url }}" {% if request.get_full_path == menu_url %}  class="act-link" {% endif %}>Menu </i></a>
+                    <!--second level -->
+                 
+                    <!--second level end-->
+                </li>
+                <li>
+                    {% url 'about' as about_url %}
+                    <a href="{{ about_url }}" {% if request.get_full_path == about_url %}  class="act-link" {% endif %}>About</a>
+                </li>
+              
+                <li>
+                    {% url 'home_services' as services_url %}
+                    <a href="{{services_url}}" {% if request.get_full_path == services_url %} class="act-link" {% endif %}>Services </a>
+                    <!--second level -->   
+                                                
+                </li>
+
+
+                {% if user.is_authenticated %}
+                <li>
+                    <div class="dropdown">
+                        
+                        <a class="login-select ms-3 dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi bi-person-check-fill"></i>  {{user.first_name}} {{user.last_name}}
+                        </a>
+
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            <li><a class="dropdown-item" href="{% url 'profile' user.id %}">Profile</a></li>
+                            <!-- <li><a class="dropdown-item" href="#">Services</a></li> -->
+                            <li><a class="dropdown-item" href="#" onclick="logoutNotify()">Log-out</a></li>
+                            
+                        </ul>
+                    </div>                           
+                </li>
+                {% else %}
+                <li>
+                    <a href="{% url 'login' %}"  class="login-select"> <i class="bi bi-box-arrow-in-right"></i> Sign In</i></a>                              
+                </li>
+                {% endif %}
+                
+                <!-- {% if user.is_authenticated %}
+                <li>
+                    <div class="dropdown">
+                        
+                        <a class="login-select ms-3 dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                              {{user.first_name}}
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                            <li><a class="dropdown-item" href="{% url 'profile' user.id %}">Profile</a></li>
+                            <li><a class="dropdown-item" href="#">Services</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="logoutNotify()">Log-out</a></li>
+                        
+                        </ul>
+                    </div>                           
+                </li>
+                {% else %}
+                <li>
+                    
+                    <a href="{% url 'login' %}"  class="login-select"> <i class="bi bi-box-arrow-in-right"></i> Sign In</i></a>                              
+                </li>
+                {% endif %} -->
+            </ul>
+        </nav>
+    </div>
+    <!-- navigation  end -->
+</header>
+<!-- header end-->

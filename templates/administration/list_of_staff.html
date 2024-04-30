@@ -1,0 +1,48 @@
+{% extends 'administration/base/main.html' %}
+{% load static %}
+
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="card shadow mb-4">
+            <div class="card-header bg-primary py-3 ">
+                <h6 class="m-0 font-weight-bold text-white">List of Staff</h6>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Position</th>
+                                <!-- <th>Department</th> -->
+                                <!-- <th>Date Created</th> -->
+                                <th>Date Hired</th>
+                                <!-- <th>Action</th> -->
+                            </tr>
+                            
+                        </thead>
+                        
+                        <tbody>
+                            {% for staff in staff_list %}
+                            <tr>
+                            <td>{{staff.first_name}} {{staff.last_name}}</td>
+                                <td>{{staff.email}}</td>
+                                <td>{{staff.librarystaffmoreinfo.position}}</td>
+                                <!-- <td>{{staff.librarystaffmoreinfo.department}}</td> -->
+                                <td>{{staff.date_hired}}</td>
+                                <!-- <td class="text-center">
+                                    <a href="#" class="btn btn-success btn-icon btn-sm"><i class="fas fa-fw fa-pen"></i></a>
+                                </td> -->
+                            </tr>
+                                {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+{% endblock %}
