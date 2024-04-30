@@ -29,7 +29,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', 'l0yw5&ox2!+68*lx#*6w5uev_()njueg%q$8n_!cnyi&nf8fd2')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['librarymanagement.online', 'www.librarymanagement.online']
 
