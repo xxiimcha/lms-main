@@ -28,7 +28,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', 'l0yw5&ox2!+68*lx#*6w5uev_()njueg%q$8n_!cnyi&nf8fd2')
 
-# SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
 ALLOWED_HOSTS = ['librarymanagement.online', 'www.librarymanagement.online']
@@ -148,6 +147,10 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# Session will expire after 30 minutes of inactivity
+SESSION_COOKIE_AGE = 60  # 30 minutes * 60 seconds
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+SESSION_ENGINE = 'django.contrib.sessions.backends.db'
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
