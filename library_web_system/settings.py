@@ -16,7 +16,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', 'l0yw5&ox2!+68*lx#*6w5uev_()njueg%q$8n_!cnyi&nf8fd2')
 
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['62.72.56.86','librarymanagement.online', 'www.librarymanagement.online']
 
