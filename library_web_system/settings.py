@@ -18,7 +18,7 @@ SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', 'l0yw5&ox2!+68*lx#*6w5uev_()njueg%q$
 
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['*', 'librarymanagement.online']
 
 # Application definition
 
