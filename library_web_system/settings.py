@@ -7,13 +7,8 @@ from django.core.management.utils import get_random_secret_key
 
 load_dotenv()
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', 'l0yw5&ox2!+68*lx#*6w5uev_()njueg%q$8n_!cnyi&nf8fd2')
 
 DEBUG = True
@@ -110,12 +105,24 @@ WSGI_APPLICATION = 'library_web_system.wsgi.application'
 # }
 # else:
     # print("SQLITE 3")
+#DATABASES = {
+#        'default': {
+#            'ENGINE': 'django.db.backends.sqlite3',
+#            'NAME': BASE_DIR / 'db.sqlite3',
+#        }
+#   }
+
 DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': BASE_DIR / 'db.sqlite3',
-        }
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'lmsdatabase',  # Replace with your actual database name
+        'USER': 'Lms',  # Replace with your actual username
+        'PASSWORD': '',  # Replace with your actual password
+        'HOST': 'localhost',  # Adjust as necessary, typically 'localhost' or the actual host IP
+        'PORT': '5432',  # Default PostgreSQL port
     }
+}
+
 #DATABASES = {
     #    'default': {
     #        'ENGINE': 'django.db.backends.mysql',
