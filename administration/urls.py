@@ -36,6 +36,7 @@ urlpatterns = [
     path('borrow_book_walkin/', views.get_book_borrowed, name="borrowed_books"),
     
     path('change_password/',views.account_settings, name="change_password"),
+    path('backup_restore/', views.backup_restore, name='backup_restore'),
 
 
     path('admin-password-reset/', AdminPasswordResetView.as_view(), name='admin_password_reset'),

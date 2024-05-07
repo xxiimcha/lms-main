@@ -14,6 +14,10 @@ from django.contrib import messages
 import json
 from datetime import date
 
+from django.http import HttpResponse
+from django.core.management import call_command
+from django.views.decorators.http import require_http_methods
+from django.views.decorators.csrf import csrf_protect
 
 from django.contrib.auth.views import PasswordResetView, PasswordResetDoneView, PasswordResetConfirmView, PasswordResetCompleteView
 from django.urls import reverse_lazy
@@ -477,7 +481,15 @@ def account_settings(request):
 
 
 
-
+def backup_restore(request):
+    if request.method == 'POST':
+        if 'backup' in request.POST:
+            call_command('backup_db')
+            return HttpResponse("Database backed up successfully.")
+        elif 'restore' in request.POST:
+            call_command('restore_db')
+            return HttpResponse("Database restored successfully.")
+    return render(request, 'administration/backup_restore.html')
 
 # utils
 
@@ -507,3 +519,4 @@ class AdminPasswordResetConfirmView(PasswordResetConfirmView):
 
 class AdminPasswordResetCompleteView(PasswordResetCompleteView):
     template_name = "password/password_reset_complete.html"
+
