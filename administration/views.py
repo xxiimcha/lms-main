@@ -479,7 +479,15 @@ def account_settings(request):
 
 
 
-
+def borrowed_books_list(request):
+    # Query to get records where status is 'BORROWED'
+    borrowed_books = BorrowReservedBook.objects.filter(status=BorrowReservedBook.Status.BORROWED)
+    
+    context = {
+        'borrowed_books': borrowed_books
+    }
+    
+    return render(request, 'administration/borrowed_books.html', context)
 
 def backup_restore(request):
     if request.method == 'POST':

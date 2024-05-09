@@ -1290,3 +1290,7 @@ $(document).ready(function () {
     initTowhub();
     initparallax();
 });
+
+$(document).ready(function() {
+  $('#welcomeModal').modal('show');
+});

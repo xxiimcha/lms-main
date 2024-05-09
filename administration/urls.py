@@ -33,7 +33,7 @@ urlpatterns = [
     path('return_book_reservation/<str:pk>', views.return_books_from_reservation, name="return_book_reservation"),
     path('borrow_book_walkin/', views.borrow_book_walkin, name="borrow_book_walkin"),
     path('search_book/', views.get_book_info_walk, name="search_book"),
-    path('borrow_book_walkin/', views.get_book_borrowed, name="borrowed_books"),
+    path('borrowed_books_list/', views.borrowed_books_list, name="borrowed_books"),
     
     path('change_password/',views.account_settings, name="change_password"),
     path('backup_restore/', views.backup_restore, name='backup_restore'),

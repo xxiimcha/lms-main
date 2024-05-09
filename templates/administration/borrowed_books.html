@@ -1,0 +1,35 @@
+{% extends 'administration/base/main.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="card shadow mb-4">
+        <div class="card-header bg-primary py-3 ">
+            <h6 class="m-0 font-weight-bold text-white">List of Borrowed Books</h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Reservee</th>
+                            <th>Title</th>
+                            <th>Borrowed Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for book in borrowed_books %}
+                        <tr>
+                            <td>{{ book.reserved_book.reservee }}</td>
+                            <td>{{ book.reserved_book.book.title }}</td>
+                            <td>{{ book.borrowed_date|date:"Y-m-d H:i" }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
