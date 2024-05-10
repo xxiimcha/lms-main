@@ -34,6 +34,7 @@ urlpatterns = [
     path('borrow_book_walkin/', views.borrow_book_walkin, name="borrow_book_walkin"),
     path('search_book/', views.get_book_info_walk, name="search_book"),
     path('borrowed_books_list/', views.borrowed_books_list, name="borrowed_books"),
+    path('reserved_books_list/', views.reserved_books_list, name="reserved_books"),
     
     path('change_password/',views.account_settings, name="change_password"),
     path('backup_restore/', views.backup_restore, name='backup_restore'),

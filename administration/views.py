@@ -489,6 +489,16 @@ def borrowed_books_list(request):
     
     return render(request, 'administration/borrowed_books.html', context)
 
+def reserved_books_list(request):
+    # Query to get records where status is 'BORROWED'
+    borrowed_books = BookReservation.objects.filter(status=BookReservation.Status.APPROVED)
+    
+    context = {
+        'reservations': borrowed_books
+    }
+    
+    return render(request, 'administration/reserved_books.html', context)
+
 def backup_restore(request):
     if request.method == 'POST':
         if 'backup' in request.POST:
