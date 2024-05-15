@@ -53,8 +53,10 @@ class ReaderLoginForm(forms.Form):
     username = forms.CharField(max_length=50,
                               widget=forms.TextInput(attrs={'placeholder':'Enter email address'}),
                               required=True,label="Email")
-    password = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder':'Enter password'}), 
-                               required=True)
+    password = forms.CharField(
+        widget=forms.PasswordInput(attrs={'placeholder': 'Enter password', 'id': 'id_password'}),
+        required=True
+    )
 
     def clean(self):
         username = self.cleaned_data.get('username')
