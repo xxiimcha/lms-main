@@ -46,26 +46,23 @@ def admin_index(request):
 @allowed_users(allowed_roles=["LIBRARY_STAFF"])
 def admin_addstaff(request):
     form = AddLibraryStaffForm()
-    # formset = LibraryStaffFormset()
 
     if request.method == "POST":
         form = AddLibraryStaffForm(request.POST)
         if form.is_valid():
-            form.save()
+            staff = form.save(commit=False)  # Save the form data but don't commit to the database yet
+            staff.is_superuser = True        # Set is_superuser to True
+            staff.save()                     # Now save to the database
             position = request.POST.get('position')
-            staff = LibraryStaff.objects.get(email=request.POST.get('email'))
-            staff_add = LibraryStaffMoreInfo.objects.create(user=staff,position=position)
+            LibraryStaffMoreInfo.objects.create(user=staff, position=position)
             messages.success(request, 'Staff account created successfully!')
             return redirect('admin_staff_list')
-  
-    
+
     context = {
-        'form' : form,
-        # 'formset' : formset,
+        'form': form,
     }
 
-    return render(request,'administration/add_staff.html',context)
-
+    return render(request, 'administration/add_staff.html', context)
 
 @login_required(login_url='admin_login')
 @allowed_users(allowed_roles=["LIBRARY_STAFF"])
