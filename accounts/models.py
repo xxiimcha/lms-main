@@ -92,7 +92,7 @@ class ReaderMoreInfo(models.Model):
     birth_place = models.TextField(verbose_name="Birthplace")
     reader_type = models.CharField(max_length=20,null=True,verbose_name="Reader Type")
     school = models.TextField(verbose_name="School",default="")
-
+    face_descriptor = models.TextField(null=True, blank=True)
 
     def __str__(self):
         return str(self.user)

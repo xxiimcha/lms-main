@@ -122,10 +122,8 @@ def reader_makereservation(request,pk):
 
 
 def registration_reader(request):
-
-    if  request.user.is_authenticated: 
-        return redirect('profile',pk=request.user.id)
-
+    if request.user.is_authenticated:
+        return redirect('profile', pk=request.user.id)
 
     form = ReaderRegistrationForm()
 
@@ -141,6 +139,7 @@ def registration_reader(request):
             birth_place = request.POST.get('birth_place')
             reader_type = request.POST.get('reader_type')
             school = request.POST.get('school')
+            face_descriptor = request.POST.get('face_descriptor')
 
             user1 = Reader.objects.get(email=request.POST.get('email'))
             reader_add_info = ReaderMoreInfo.objects.create(
@@ -150,10 +149,9 @@ def registration_reader(request):
                 birth_date=birth_date,
                 birth_place=birth_place,
                 reader_type=reader_type,
-                school=school
+                school=school,
+                face_descriptor=face_descriptor  # Store face descriptor
             )
-
-
 
             current_site = get_current_site(request)
             mail_subject = 'Activate your account.'
@@ -166,16 +164,15 @@ def registration_reader(request):
 
             to_email = form.cleaned_data.get('email')
 
-            email = EmailHelper(mail_subject,message,to_email)
+            email = EmailHelper(mail_subject, message, to_email)
             email.send_email()
 
-            # return redirect('login')
             return HttpResponse('Please confirm your email address to complete the registration')
-    context  = {
-        'form' : form
-    }
-    return render(request,'registration/register.html',context)
 
+    context = {
+        'form': form
+    }
+    return render(request, 'registration/register.html', context)
 
 
 def login_reader(request):
