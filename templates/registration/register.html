@@ -25,14 +25,14 @@
                             <img class="img-fluid" src="{% static 'images/logo-library.jpg' %}" style="width: 100px;">
                             <h3 class="mb-3 text-start fs-4 mt-3" style="color: #E693CE;">Register an Account</h3>
                         </div>
-                        <form class="row g-3" method="post">
+                        <form class="row g-3" method="post" enctype="multipart/form-data">
                             {% csrf_token %}
                             {{ form.non_field_errors }}
 
                             <div class="col-md-12 text-start fs-6">
-                                <label for="camera" class="form-label">Camera Feed</label>
-                                <video id="camera" width="320" height="240" autoplay></video>
-                                <button id="capture" type="button" class="btn btn-secondary mt-2">Capture Photo</button>
+                                <label for="photo" class="form-label">Upload Photo</label>
+                                <input type="file" id="photo" class="form-control" accept="image/*">
+                                <button id="process" type="button" class="btn btn-secondary mt-2">Process Photo</button>
                                 <canvas id="canvas" width="320" height="240" style="display:none;"></canvas>
                                 <input type="hidden" id="face_descriptor" name="face_descriptor">
                             </div>
@@ -95,50 +95,44 @@
         </div>
     </div>
 
-    <!-- Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-    <!-- face-api.js -->
     <script defer src="https://cdn.jsdelivr.net/npm/@vladmandic/face-api@latest/dist/face-api.min.js"></script>
 
     <script>
         document.addEventListener('DOMContentLoaded', async function() {
-            var video = document.getElementById('camera');
+            var photoInput = document.getElementById('photo');
             var canvas = document.getElementById('canvas');
             var context = canvas.getContext('2d');
-            var captureButton = document.getElementById('capture');
+            var processButton = document.getElementById('process');
             var faceDescriptorInput = document.getElementById('face_descriptor');
 
             await faceapi.nets.ssdMobilenetv1.loadFromUri('{% static "models" %}');
             await faceapi.nets.faceRecognitionNet.loadFromUri('{% static "models" %}');
             await faceapi.nets.faceLandmark68Net.loadFromUri('{% static "models" %}');
 
-            if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-                navigator.mediaDevices.getUserMedia({ video: true })
-                .then(function(stream) {
-                    video.srcObject = stream;
-                    video.play();
-                })
-                .catch(function(error) {
-                    console.error("Error accessing webcam: ", error);
-                });
-            } else {
-                alert("getUserMedia not supported in this browser.");
-                console.error("getUserMedia not supported in this browser.");
-            }
+            processButton.addEventListener('click', async function() {
+                if (photoInput.files.length > 0) {
+                    var file = photoInput.files[0];
+                    var img = new Image();
+                    img.src = URL.createObjectURL(file);
+                    img.onload = async function() {
+                        context.drawImage(img, 0, 0, 320, 240);
+                        const detections = await faceapi.detectSingleFace(canvas).withFaceLandmarks().withFaceDescriptor();
+                        
+                        if (detections) {
+                            const faceDescriptor = detections.descriptor;
+                            const faceDescriptorString = JSON.stringify(faceDescriptor);
 
-            captureButton.addEventListener('click', async function() {
-                context.drawImage(video, 0, 0, 320, 240);
-                const detections = await faceapi.detectSingleFace(canvas).withFaceLandmarks().withFaceDescriptor();
-
-                if (detections) {
-                    const faceDescriptor = detections.descriptor;
-                    const faceDescriptorString = JSON.stringify(faceDescriptor);
-
-                    faceDescriptorInput.value = faceDescriptorString;
-                    console.log("Face detected and descriptor captured.");
+                            faceDescriptorInput.value = faceDescriptorString;
+                            console.log("Face detected and descriptor captured.");
+                        } else {
+                            alert("No face detected. Please try again.");
+                            console.error("No face detected.");
+                        }
+                    };
                 } else {
-                    alert("No face detected. Please try again.");
-                    console.error("No face detected.");
+                    alert("Please upload a photo.");
+                    console.error("No photo uploaded.");
                 }
             });
         });
