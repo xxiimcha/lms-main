@@ -98,3 +98,4 @@ Procfile
 # db.sqlite3
 # db.sqlite3-journal
 django/*
+db.sqlite3

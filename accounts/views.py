@@ -1,7 +1,6 @@
 from django.urls import reverse_lazy
 from helpers.qr_helper import qr_code_generator
 
-
 from django.shortcuts import redirect, render
 from django.http import HttpResponse
 
@@ -176,10 +175,8 @@ def registration_reader(request):
 
 
 def login_reader(request):
-    # if request.request.user.is_authenticated:
-    
-    if  request.user.is_authenticated: 
-        return redirect('profile',pk=request.user.id)
+    if request.user.is_authenticated:
+        return redirect('profile', pk=request.user.id)
 
     form = ReaderLoginForm()
 
@@ -188,14 +185,33 @@ def login_reader(request):
         if form.is_valid():
             user = form.login(request)
             if user is not None:
-                login(request,user)
-                return redirect('home')
+                face_descriptor = request.POST.get('face_descriptor')
+                if face_descriptor:
+                    face_descriptor = np.array(json.loads(face_descriptor))
+                    try:
+                        reader_info = ReaderMoreInfo.objects.get(user=user)
+                        stored_face_descriptor = np.array(json.loads(reader_info.face_descriptor))
+
+                        # Calculate the Euclidean distance between the face descriptors
+                        distance = np.linalg.norm(face_descriptor - stored_face_descriptor)
+                        threshold = 0.6  # Adjust the threshold based on your requirements
+
+                        if distance < threshold:
+                            login(request, user)
+                            return redirect('home')
+                        else:
+                            form.add_error(None, "Face recognition failed. Please try again.")
+                    except ReaderMoreInfo.DoesNotExist:
+                        form.add_error(None, "Face descriptor not found for this user.")
+                else:
+                    form.add_error(None, "Please capture a photo for face recognition.")
+            else:
+                form.add_error(None, "Invalid username or password.")
 
     context = {
-        'form' : form
+        'form': form
     }
-    return render(request,'registration/login.html',context)
-
+    return render(request, 'registration/login.html', context)
 
 def logout_reader(request):
     logout(request)

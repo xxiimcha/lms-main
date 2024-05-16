@@ -21,36 +21,39 @@
             <div class="container">
                 <div class="row d-flex justify-content-center align-items-center" style="height: 100vh;min-height:600px">
                     <div class="col-lg-5 col-md-6 col-sm-10  shadow-lg p-3 rounded card">
-                       
                         <div class="row mb-3">
                             <div class="d-flex flex-column justify-content-center">
-                                <!-- <div class="d-flex flex-column"> -->
-                                    <img class="img-fluid rounded mx-auto d-block" src="{% static 'images/logo-library.jpg' %}" style="width:150px; height:150px">
-                                    <h2 class="text-center mt-2" style="font-size: 25px;color: #E693CE"> Library System  </h2>
-                                <!-- </div> -->
-                                
+                                <img class="img-fluid rounded mx-auto d-block" src="{% static 'images/logo-library.jpg' %}" style="width:150px; height:150px">
+                                <h2 class="text-center mt-2" style="font-size: 25px;color: #E693CE"> Library System  </h2>
                             </div>
                         </div>
                         <h1 class="text-center" style="font-size: 20px;color:#333333">Sign-in your account</h1>
-                        <form action="" method="post" class="mt-3 row-3 d-grid">
+                        <form action="" method="post" class="mt-3 row-3 d-grid" enctype="multipart/form-data">
                             {% csrf_token %}
                             {% if form.non_field_errors %}
                                 {% for error in form.non_field_errors %}
-                                        <div class="alert alert-danger  alert-dismissible fade show" role="alert">
-                                            {{ error }}
-                                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                                        </div> 
+                                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                        {{ error }}
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                    </div> 
                                 {% endfor %}
                             {% endif %}
                             {{form.username.errors}}
-                            {{form.username |as_crispy_field }}
+                            {{form.username|as_crispy_field}}
                             {{form.password.errors}}
-                            {{form.password |as_crispy_field }}
+                            {{form.password|as_crispy_field}}
 
-                            <!-- <a href="#" class="mb-4">Forget password?</a> -->
+                            <div class="mb-3">
+                                <label for="camera" class="form-label">Live Face Recognition</label>
+                                <video id="camera" width="320" height="240" autoplay></video>
+                                <button id="capture" type="button" class="btn btn-secondary mt-2">Capture Photo</button>
+                                <canvas id="canvas" width="320" height="240" style="display:none;"></canvas>
+                                <input type="hidden" id="face_descriptor" name="face_descriptor">
+                            </div>
+
                             <div class="small">
-                                <p class="fs-6"><a href="{% url 'password_reset' %}" class="secondary-color">Forgot password</a> </p>
-                              </div>
+                                <p class="fs-6"><a href="{% url 'password_reset' %}" class="secondary-color">Forgot password</a></p>
+                            </div>
                             <button type="submit" class="btn btn-primary mb-3">LOGIN</button>
                             <h3 class="fs-6">No account yet? <a href="{% url 'register' %}" style="color: #313191;">Register here</a></h3>
                         </form>
@@ -58,13 +61,53 @@
                 </div>
             </div>
         </div>
-        
     </section>
 
-    <!-- Optional JavaScript; choose one of the two! -->
-
-    <!-- Option 1: Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/@vladmandic/face-api@latest/dist/face-api.min.js"></script>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', async function() {
+            var video = document.getElementById('camera');
+            var canvas = document.getElementById('canvas');
+            var context = canvas.getContext('2d');
+            var captureButton = document.getElementById('capture');
+            var faceDescriptorInput = document.getElementById('face_descriptor');
+
+            await faceapi.nets.ssdMobilenetv1.loadFromUri('{% static "models" %}');
+            await faceapi.nets.faceRecognitionNet.loadFromUri('{% static "models" %}');
+            await faceapi.nets.faceLandmark68Net.loadFromUri('{% static "models" %}');
+
+            if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+                navigator.mediaDevices.getUserMedia({ video: true })
+                .then(function(stream) {
+                    video.srcObject = stream;
+                    video.play();
+                })
+                .catch(function(error) {
+                    console.error("Error accessing webcam: ", error);
+                });
+            } else {
+                alert("getUserMedia not supported in this browser.");
+                console.error("getUserMedia not supported in this browser.");
+            }
+
+            captureButton.addEventListener('click', async function() {
+                context.drawImage(video, 0, 0, 320, 240);
+                const detections = await faceapi.detectSingleFace(canvas).withFaceLandmarks().withFaceDescriptor();
+
+                if (detections) {
+                    const faceDescriptor = detections.descriptor;
+                    const faceDescriptorString = JSON.stringify(faceDescriptor);
+
+                    faceDescriptorInput.value = faceDescriptorString;
+                    console.log("Face detected and descriptor captured.");
+                } else {
+                    alert("No face detected. Please try again.");
+                    console.error("No face detected.");
+                }
+            });
+        });
+    </script>
   </body>
 </html>
