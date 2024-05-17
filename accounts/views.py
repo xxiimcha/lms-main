@@ -26,6 +26,8 @@ from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.contrib.auth.views import PasswordResetView
 import datetime
+import json
+import math
 
 @login_required
 def profile_reader(request,pk):
@@ -187,13 +189,15 @@ def login_reader(request):
             if user is not None:
                 face_descriptor = request.POST.get('face_descriptor')
                 if face_descriptor:
-                    face_descriptor = np.array(json.loads(face_descriptor))
+                    face_descriptor_dict = json.loads(face_descriptor)
+                    face_descriptor = [float(face_descriptor_dict[key]) for key in sorted(face_descriptor_dict.keys(), key=int)]  # Convert to floats
                     try:
                         reader_info = ReaderMoreInfo.objects.get(user=user)
-                        stored_face_descriptor = np.array(json.loads(reader_info.face_descriptor))
+                        stored_face_descriptor_dict = json.loads(reader_info.face_descriptor)
+                        stored_face_descriptor = [float(stored_face_descriptor_dict[key]) for key in sorted(stored_face_descriptor_dict.keys(), key=int)]  # Convert to floats
 
                         # Calculate the Euclidean distance between the face descriptors
-                        distance = np.linalg.norm(face_descriptor - stored_face_descriptor)
+                        distance = math.sqrt(sum((a - b) ** 2 for a, b in zip(face_descriptor, stored_face_descriptor)))
                         threshold = 0.6  # Adjust the threshold based on your requirements
 
                         if distance < threshold:
