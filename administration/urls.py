@@ -18,6 +18,8 @@ urlpatterns = [
     path('logout',views.admin_logout,name="admin_logout"),
     path('add_staff/',views.admin_addstaff, name="admin_add_staff"),
     path('list_staff/',views.admin_staff_list, name="admin_staff_list"),
+    path('staff/edit/<int:pk>/', views.edit_staff, name='edit_staff'),
+    
     path('add_classification',views.admin_add_book_classification, name="admin_add_classification"),
     path('add_book/',views.admin_add_book, name="admin_add_book"),
     path('list_book/',views.admin_book_list, name="admin_book_list"),

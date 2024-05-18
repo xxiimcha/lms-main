@@ -74,12 +74,6 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', async function() {
-            // Check if the page is served over HTTPS
-            if (location.protocol !== 'https:') {
-                alert('getUserMedia requires HTTPS. Please use HTTPS to access this feature.');
-                return;
-            }
-
             var video = document.getElementById('camera');
             var canvas = document.getElementById('canvas');
             var context = canvas.getContext('2d');
@@ -121,7 +115,6 @@
                 }
             });
 
-            // Show face recognition section after successful form validation
             document.getElementById('login-form').addEventListener('submit', function(event) {
                 if (document.getElementById('face-recognition-section').style.display === 'none') {
                     event.preventDefault(); // Prevent form from submitting the first time

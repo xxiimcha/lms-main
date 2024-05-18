@@ -1,5 +1,5 @@
 from django.http import JsonResponse
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect, render, get_object_or_404
 from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
 from accounts.models import LibraryStaff, LibraryStaffMoreInfo
@@ -73,7 +73,18 @@ def admin_staff_list(request):
     }
     return render(request,'administration/list_of_staff.html',context)
 
-
+@login_required(login_url='admin_login')
+@allowed_users(allowed_roles=["LIBRARY_STAFF"])
+def edit_staff(request, pk):
+    staff = get_object_or_404(LibraryStaff, pk=pk)  # Use LibraryStaff instead of Staff
+    if request.method == "POST":
+        form = AddLibraryStaffForm(request.POST, instance=staff)
+        if form.is_valid():
+            form.save()
+            return redirect('staff_list')
+    else:
+        form = AddLibraryStaffForm(instance=staff)
+    return render(request, 'administration/add_staff.html', {'form': form, 'title': 'Edit Staff', 'button_text': 'Update Staff'})
 
 @login_required(login_url='admin_login')
 @allowed_users(allowed_roles=["LIBRARY_STAFF"], allowed_position=["ADMIN"])
@@ -164,6 +175,7 @@ def decline_reservatioon(request,pk):
 """
 modified this code!
 """
+
 @login_required(login_url='admin_login')
 @allowed_users(allowed_roles=["LIBRARY_STAFF"])
 def borrowed_reserved(request):
