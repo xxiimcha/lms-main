@@ -76,12 +76,12 @@ def admin_staff_list(request):
 @login_required(login_url='admin_login')
 @allowed_users(allowed_roles=["LIBRARY_STAFF"])
 def edit_staff(request, pk):
-    staff = get_object_or_404(LibraryStaff, pk=pk)  # Use LibraryStaff instead of Staff
+    staff = get_object_or_404(LibraryStaff, pk=pk)
     if request.method == "POST":
         form = AddLibraryStaffForm(request.POST, instance=staff)
         if form.is_valid():
             form.save()
-            return redirect('staff_list')
+            return redirect('staff_list')  # Ensure this matches the URL pattern name
     else:
         form = AddLibraryStaffForm(instance=staff)
     return render(request, 'administration/add_staff.html', {'form': form, 'title': 'Edit Staff', 'button_text': 'Update Staff'})

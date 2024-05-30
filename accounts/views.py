@@ -189,24 +189,31 @@ def login_reader(request):
             if user is not None:
                 face_descriptor = request.POST.get('face_descriptor')
                 if face_descriptor:
-                    face_descriptor_dict = json.loads(face_descriptor)
-                    face_descriptor = [float(face_descriptor_dict[key]) for key in sorted(face_descriptor_dict.keys(), key=int)]  # Convert to floats
                     try:
-                        reader_info = ReaderMoreInfo.objects.get(user=user)
-                        stored_face_descriptor_dict = json.loads(reader_info.face_descriptor)
-                        stored_face_descriptor = [float(stored_face_descriptor_dict[key]) for key in sorted(stored_face_descriptor_dict.keys(), key=int)]  # Convert to floats
+                        face_descriptor_dict = json.loads(face_descriptor)
+                        face_descriptor = [float(face_descriptor_dict[key]) for key in sorted(face_descriptor_dict.keys(), key=int)]  # Convert to floats
+                        
+                        try:
+                            reader_info = ReaderMoreInfo.objects.get(user=user)
+                            if reader_info.face_descriptor:
+                                stored_face_descriptor_dict = json.loads(reader_info.face_descriptor)
+                                stored_face_descriptor = [float(stored_face_descriptor_dict[key]) for key in sorted(stored_face_descriptor_dict.keys(), key=int)]  # Convert to floats
 
-                        # Calculate the Euclidean distance between the face descriptors
-                        distance = math.sqrt(sum((a - b) ** 2 for a, b in zip(face_descriptor, stored_face_descriptor)))
-                        threshold = 0.6  # Adjust the threshold based on your requirements
+                                # Calculate the Euclidean distance between the face descriptors
+                                distance = math.sqrt(sum((a - b) ** 2 for a, b in zip(face_descriptor, stored_face_descriptor)))
+                                threshold = 0.6  # Adjust the threshold based on your requirements
 
-                        if distance < threshold:
-                            login(request, user)
-                            return redirect('home')
-                        else:
-                            form.add_error(None, "Face recognition failed. Please try again.")
-                    except ReaderMoreInfo.DoesNotExist:
-                        form.add_error(None, "Face descriptor not found for this user.")
+                                if distance < threshold:
+                                    login(request, user)
+                                    return redirect('home')
+                                else:
+                                    form.add_error(None, "Face recognition failed. Please try again.")
+                            else:
+                                form.add_error(None, "Face descriptor not found for this user.")
+                        except ReaderMoreInfo.DoesNotExist:
+                            form.add_error(None, "Face descriptor not found for this user.")
+                    except json.JSONDecodeError:
+                        form.add_error(None, "Invalid face descriptor format.")
                 else:
                     form.add_error(None, "Please capture a photo for face recognition.")
             else:
